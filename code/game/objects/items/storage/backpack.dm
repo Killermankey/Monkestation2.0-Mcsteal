@@ -411,11 +411,14 @@
 
 	..()
 
+/obj/item/storage/backpack/satchel/flat/listening_post_secret_stash
+	desc = "God, the stench from this thing is potent."
+
 /obj/item/storage/backpack/satchel/flat/listening_post_secret_stash/PopulateContents()
-	new /obj/item/clothing/head/helmet/space/eva(src)
-	new /obj/item/clothing/suit/space/eva(src)
-	new /obj/item/tank/internals/oxygen/empty(src)
-	new /obj/item/tank/internals/oxygen/empty(src)
+	new /obj/item/seeds/cannabis(src)
+	new /obj/item/food/grown/cannabis(src)
+	new /obj/item/storage/box/donkpockets/donkpockethonk(src)
+	new /obj/item/choice_beacon/pet(src)
 
 	..()
 
@@ -678,6 +681,7 @@
 	desc = "A large duffel bag containing a C-20r, some magazines, and a cheap looking suppressor."
 
 /obj/item/storage/backpack/duffelbag/syndie/c20rbundle/PopulateContents()
+	new /obj/item/ammo_box/magazine/smgm45(src)
 	new /obj/item/ammo_box/magazine/smgm45(src)
 	new /obj/item/ammo_box/magazine/smgm45(src)
 	new /obj/item/gun/ballistic/automatic/c20r(src)
