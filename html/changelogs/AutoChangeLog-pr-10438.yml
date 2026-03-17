@@ -1,5 +1,0 @@
-author: "Absolucy"
-delete-after: True
-changes:
-  - bugfix: "Fixed some languages (most notably Shadowtongue) missing their icons."
-  - image: "The Mushroom language now has an icon."
