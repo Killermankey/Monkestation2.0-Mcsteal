@@ -71,7 +71,7 @@
 	var/atom/movable/pulling
 	var/grab_state = 0
 	/// The strongest grab we can acomplish
-	var/max_grab = GRAB_KILL
+	var/max_grab = GRAB_PASSIVE
 	var/throwforce = 0
 	var/datum/component/orbiter/orbiting
 
@@ -120,6 +120,9 @@
 
 	/// If TRUE, then this will be affected by things such as the "Bot Language Matrix Malfunction" station trait.
 	var/can_language_malfunction = TRUE
+
+	/// The weight for A* pathfinding added to turfs this atom is on.
+	var/astar_weight
 
 /mutable_appearance/emissive_blocker
 
@@ -190,6 +193,10 @@
 		if(MOVABLE_LIGHT_BEAM)
 			AddComponent(/datum/component/overlay_lighting, is_directional = TRUE, is_beam = TRUE)
 
+	if(astar_weight && isturf(loc))
+		var/turf/turf_loc = loc
+		turf_loc.astar_weight += astar_weight
+
 /atom/movable/Destroy(force)
 	QDEL_NULL(language_holder)
 	QDEL_NULL(em_block)
@@ -201,7 +208,6 @@
 		if(((can_atmos_pass == ATMOS_PASS_DENSITY && density) || can_atmos_pass == ATMOS_PASS_NO) && isturf(loc))
 			can_atmos_pass = ATMOS_PASS_YES
 			air_update_turf(TRUE, FALSE)
-		loc.handle_atom_del(src)
 
 	if(opacity)
 		RemoveElement(/datum/element/light_blocking)
@@ -867,6 +873,12 @@
 	var/turf/old_turf = get_turf(old_loc)
 	var/turf/new_turf = get_turf(src)
 
+	if(astar_weight)
+		if(old_turf)
+			old_turf.astar_weight -= astar_weight
+		if(new_turf)
+			new_turf.astar_weight += astar_weight
+
 	if (old_turf?.z != new_turf?.z)
 		var/same_z_layer = (GET_TURF_PLANE_OFFSET(old_turf) == GET_TURF_PLANE_OFFSET(new_turf))
 		on_changed_z_level(old_turf, new_turf, same_z_layer)
@@ -1124,7 +1136,9 @@
 /atom/movable/proc/forceMove(atom/destination)
 	. = FALSE
 	if(QDELING(src))
-		CRASH("Illegal forceMove() on qdeling [type]")
+		if(!isorgan(src))
+			CRASH("Illegal forceMove() on qdeling [type]")
+		return
 
 	if(destination)
 		. = doMove(destination)
