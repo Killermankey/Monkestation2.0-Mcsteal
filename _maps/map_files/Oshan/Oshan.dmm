@@ -3776,13 +3776,6 @@
 	},
 /turf/open/floor/carpet/executive,
 /area/station/science/lobby)
-"bju" = (
-/obj/effect/turf_decal/trimline/blue/filled/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/trimline/blue/line,
-/turf/open/floor/iron/white/textured,
-/area/station/medical/patients_rooms)
 "bjw" = (
 /obj/effect/landmark/event_spawn,
 /turf/open/floor/iron/dark/small,
@@ -4488,14 +4481,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/stairs,
 /area/station/medical/medbay/lobby)
-"bvH" = (
-/obj/structure/table/wood,
-/obj/item/camera/spooky,
-/obj/effect/heretic_rune/big,
-/obj/effect/decal/cleanable/blood/old,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/wood/tile,
-/area/station/service/library/abandoned)
 "bvK" = (
 /obj/machinery/lathe/tailor,
 /obj/effect/turf_decal/trimline/orange/filled/line{
@@ -12105,6 +12090,23 @@
 	},
 /turf/open/floor/iron/dark/textured,
 /area/station/security/courtroom)
+"dLR" = (
+/obj/effect/turf_decal/trimline/blue/warning,
+/obj/effect/turf_decal/trimline/blue/filled/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/blue/filled/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/trimline/blue/filled/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/trimline/blue/warning,
+/obj/effect/turf_decal/trimline/blue/filled/corner{
+	dir = 4
+	},
+/turf/open/floor/iron/white/textured,
+/area/station/medical/patients_rooms)
 "dLW" = (
 /obj/effect/turf_decal/trimline/dark_red/filled/line{
 	dir = 1
@@ -31445,6 +31447,10 @@
 /obj/structure/broken_flooring/side/directional/north,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/lesser)
+"jOs" = (
+/obj/item/toy/plush/shrimp,
+/turf/open/floor/grass,
+/area/station/science/ordnance/bomb)
 "jOu" = (
 /obj/structure/railing,
 /obj/effect/turf_decal/trimline/brown/filled/line,
@@ -37439,6 +37445,11 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/white/side,
 /area/station/science/xenobiology)
+"lCc" = (
+/obj/structure/lattice,
+/obj/item/toy/plush/shrimp,
+/turf/open/floor/plating/ocean,
+/area/ocean)
 "lCl" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/general/hidden,
 /obj/machinery/door/airlock/command{
@@ -42896,7 +42907,7 @@
 /obj/structure/closet/secure_closet/personal/cabinet,
 /obj/item/clothing/glasses/sunglasses,
 /obj/item/clothing/under/rank/centcom/intern,
-/obj/item/clothing/under/rank/centcom/officer_skirt,
+/obj/item/clothing/under/rank/centcom/officer/skirt,
 /obj/item/clothing/under/rank/centcom/officer,
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -68403,6 +68414,14 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/service/library/abandoned)
+"vay" = (
+/obj/machinery/door/airlock/maintenance_hatch{
+	name = "Medbay Maintenance"
+	},
+/obj/machinery/door/firedoor,
+/obj/effect/mapping_helpers/airlock/access/any/medical/general,
+/turf/open/floor/iron/white/textured,
+/area/station/maintenance/starboard/upper)
 "vaF" = (
 /obj/machinery/light_switch/directional/west,
 /obj/effect/turf_decal/siding/wood{
@@ -72263,6 +72282,15 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/central)
+"wkp" = (
+/obj/structure/table/wood,
+/obj/item/camera/spooky,
+/obj/effect/heretic_rune/big,
+/obj/effect/decal/cleanable/blood/old,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/toy/plush/shrimp,
+/turf/open/floor/wood/tile,
+/area/station/service/library/abandoned)
 "wkq" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -72386,6 +72414,14 @@
 /obj/item/assembly/flash/handheld,
 /obj/item/stamp/head/hop{
 	pixel_x = -10;
+	pixel_y = 4
+	},
+/obj/item/stamp/granted{
+	pixel_x = -12;
+	pixel_y = 4
+	},
+/obj/item/stamp/denied{
+	pixel_x = -8;
 	pixel_y = 4
 	},
 /turf/open/floor/carpet/executive,
@@ -105106,7 +105142,7 @@ cSI
 cSI
 hgP
 wyk
-bvH
+wkp
 yiU
 kXV
 hNh
@@ -109740,8 +109776,8 @@ pmd
 pmd
 bNq
 iAp
-vUP
-bju
+vay
+dLR
 kbr
 vBW
 bky
@@ -120903,7 +120939,7 @@ meJ
 cgU
 cgU
 cgU
-mdW
+lCc
 mdW
 vfe
 mdW
@@ -121000,7 +121036,7 @@ gic
 mlQ
 olK
 xkj
-xkj
+jOs
 oRV
 hGP
 sDn

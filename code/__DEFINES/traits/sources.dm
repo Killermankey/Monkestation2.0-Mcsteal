@@ -296,3 +296,9 @@
 
 /// Trait added by battle royale
 #define BATTLE_ROYALE_TRAIT "battle_royale"
+
+/// Trait gained by a guardian who is recalled
+#define GUARDIAN_RECALLED "guardian_recalled"
+
+/// Trait aquired from being painted a certain color
+#define ATOM_COLOR_TRAIT "atom_color"
