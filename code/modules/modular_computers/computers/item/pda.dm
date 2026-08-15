@@ -302,6 +302,7 @@
 	has_pda_programs = FALSE
 	starting_programs = list(
 		/datum/computer_file/program/messenger,
+		/datum/computer_file/program/emojipedia,
 	)
 
 	///Ref to the RoboTact app. Important enough to borgs to deserve a ref.
@@ -322,7 +323,6 @@
 
 /obj/item/modular_computer/pda/silicon/ai
 	max_idle_programs = 12
-	ethernet_forced = TRUE
 	starting_programs = list(
 		/datum/computer_file/program/messenger,
 		/datum/computer_file/program/filemanager,
@@ -337,6 +337,8 @@
 		/datum/computer_file/program/ntnetmonitor,
 	)
 
+/obj/item/modular_computer/pda/silicon/ai/get_ntnet_status()
+	return NTNET_ETHERNET_SIGNAL
 
 /obj/item/modular_computer/pda/silicon/Initialize(mapload)
 	. = ..()
@@ -427,6 +429,28 @@
 
 /obj/item/modular_computer/pda/silicon/ui_state(mob/user)
 	return GLOB.reverse_contained_state
+
+/obj/item/modular_computer/pda/silicon/explode(mob/target, mob/bomber, from_message_menu)
+	if(from_message_menu)
+		log_bomber(null, null, target, "'s induced disruption as [target.p_they()] tried to open their tablet message menu because of a recent tablet bomb sent to a silicon.")
+	else
+		log_bomber(bomber, "successfully tablet-disrupted", target, "as [target.p_they()] tried to reply to a rigged tablet message sent to a silicon [bomber && !is_special_character(bomber) ? "(SENT BY NON-ANTAG)" : ""]")
+	to_chat(silicon_owner, span_danger("POWER SURGE DETECTED/"))
+	do_sparks(4, FALSE, src)
+	if(isAI(silicon_owner))
+		silicon_owner.adjustFireLoss(25)
+		if(!isturf(silicon_owner.loc)) //AI not in core? not wise to disable a random APC then.
+			silicon_owner.Unconscious(10 SECONDS,  TRUE)
+		else
+			var/area/AIarea = get_area(silicon_owner)
+			var/obj/machinery/power/apc/AIapc = AIarea.apc
+			if(AIapc)
+				AIapc.energy_fail(45, forced = TRUE)
+				do_sparks(4, FALSE, AIapc)
+	else if(ispAI(silicon_owner))
+		silicon_owner.emp_act(EMP_HEAVY)
+	else //how did this happen cyborgs shouldnt have messengers, oh well!
+		silicon_owner.Paralyze(5 SECONDS)
 
 /obj/item/modular_computer/pda/silicon/cyborg/syndicate
 	icon_state = "tablet-silicon-syndicate"

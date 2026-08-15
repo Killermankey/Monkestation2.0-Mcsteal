@@ -52,6 +52,9 @@
 /// All armors, preferable in the order as seen above
 #define ARMOR_LIST_ALL(...) list(ACID, BIO, BOMB, BULLET, CONSUME, ENERGY, FIRE, LASER, MELEE, WOUND)
 
+/// Blacklist for certain objects being used with anti-drop implants or superglue - currently only d-swords.
+#define ANTI_DROP_BLACKLIST(...) list(/obj/item/dualsaber)
+
 //bitflag damage defines used for suicide_act
 #define BRUTELOSS (1<<0)
 #define FIRELOSS (1<<1)
@@ -96,6 +99,7 @@ DEFINE_BITFIELD(status_flags, list(
 
 //click cooldowns, in tenths of a second, used for various combat actions
 #define CLICK_CD_MELEE (0.8 SECONDS)
+#define CLICK_CD_FAST_MELEE (0.5 SECONDS)
 #define CLICK_CD_THROW (0.8 SECONDS)
 #define CLICK_CD_RANGE (0.4 SECONDS)
 #define CLICK_CD_RAPID (0.2 SECONDS)
@@ -107,6 +111,10 @@ DEFINE_BITFIELD(status_flags, list(
 #define CLICK_CD_GRABBING (1 SECONDS)
 #define CLICK_CD_LOOK_UP (0.5 SECONDS)
 #define CLICK_CD_WHIP (1.2 SECONDS)
+
+#define CLICK_CD_BULKY_WEAPON (2.4 SECONDS)
+#define CLICK_CD_LARGE_WEAPON (1.6 SECONDS)
+#define CLICK_CD_LIGHT_WEAPON (1.2 SECONDS)
 
 //Cuff resist speeds
 #define FAST_CUFFBREAK 1
@@ -175,7 +183,6 @@ DEFINE_BITFIELD(status_flags, list(
 GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 	/obj/item/gun)))
 
-
 //Combat object defines
 
 /// The minimum value of an item's throw_speed for it to embed (Unless it has embedded_ignore_throwspeed_threshold set to 1)
@@ -208,7 +215,7 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 ///accuracy penalty of sawn off guns
 #define SAWN_OFF_ACC_PENALTY 25
 ///added recoil of sawn off guns
-#define SAWN_OFF_RECOIL 1
+#define SAWN_OFF_RECOIL 1.5
 
 //ammo box sprite defines
 ///ammo box will always use provided icon state
@@ -255,8 +262,6 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 
 #define TOTAL_BODYPART_COUNT 6
 
-GLOBAL_LIST_INIT(arm_zones, list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
-
 #define BODY_ZONE_PRECISE_EYES "eyes"
 #define BODY_ZONE_PRECISE_MOUTH "mouth"
 #define BODY_ZONE_PRECISE_GROIN "groin"
@@ -264,6 +269,13 @@ GLOBAL_LIST_INIT(arm_zones, list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
 #define BODY_ZONE_PRECISE_R_HAND "r_hand"
 #define BODY_ZONE_PRECISE_L_FOOT "l_foot"
 #define BODY_ZONE_PRECISE_R_FOOT "r_foot"
+
+// These lists are ordered as bodyparts would be ordered
+GLOBAL_LIST_INIT(all_body_zones, list(BODY_ZONE_CHEST, BODY_ZONE_HEAD, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+GLOBAL_LIST_INIT(limb_zones, list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+GLOBAL_LIST_INIT(arm_zones, list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+GLOBAL_LIST_INIT(leg_zones, list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
+GLOBAL_LIST_INIT(all_precise_body_zones, list(BODY_ZONE_PRECISE_EYES, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_R_FOOT))
 
 //We will round to this value in damage calculations.
 #define DAMAGE_PRECISION 0.1

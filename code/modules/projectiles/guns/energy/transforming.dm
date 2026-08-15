@@ -283,7 +283,7 @@
 
 /obj/item/ammo_casing/energy/cybersun_big_kill
 	projectile_type = /obj/projectile/beam/cybersun_laser
-	e_cost = LASER_SHOTS(5, STANDARD_CELL_CHARGE)
+	e_cost = LASER_SHOTS(28, STANDARD_CELL_CHARGE)
 	select_name = "Kill"
 	fire_sound = 'monkestation/code/modules/blueshift/sounds/laser_firing/laser.ogg'
 
@@ -417,7 +417,7 @@
 
 /obj/item/ammo_casing/energy/cybersun_small_disabler
 	projectile_type = /obj/projectile/beam/cybersun_laser/disable_bounce
-	e_cost = LASER_SHOTS(10, STANDARD_CELL_CHARGE)
+	e_cost = LASER_SHOTS(14, STANDARD_CELL_CHARGE)
 	select_name = "Disable"
 	harmful = FALSE
 
@@ -443,7 +443,7 @@
 
 /obj/item/ammo_casing/energy/cybersun_small_launcher
 	projectile_type = /obj/projectile/beam/cybersun_laser/flare
-	e_cost = LASER_SHOTS(5, 1000)
+	e_cost = LASER_SHOTS(3, STANDARD_CELL_CHARGE)
 	select_name = "Flare"
 
 /obj/projectile/beam/cybersun_laser/flare
@@ -595,7 +595,7 @@
 
 	//placeholder code for figuring out a way of making this not an if string
 	//ammo selector v8
-	var/fixed_message = "[lowertext(raw_message)]"
+	var/fixed_message = "[LOWER_TEXT(raw_message)]"
 	if(findtext(fixed_message, regex("(?:detain|disable|stun)")))
 		selectammo(DETAIN, speaker)
 		return TRUE
@@ -866,7 +866,7 @@
 /obj/item/ammo_casing/energy/lawbringer/detain
 	projectile_type = /obj/projectile/lawbringer/detain
 	select_name = "detain"
-	fire_sound = 'monkestation/sound/weapons/gun/energy/Laser1.ogg'
+	fire_sound = 'sound/weapons/gun/energy/Laser1.ogg'
 	e_cost = 600 //20%, 5 shots
 	pellets = 4
 	variance = 50
@@ -1076,7 +1076,7 @@
  */
 /obj/item/ammo_casing/energy/lawbringer/tideshot
 	projectile_type = /obj/projectile/lawbringer/tideshot
-	fire_sound = 'monkestation/sound/weapons/gun/energy/Laser1.ogg'
+	fire_sound = 'sound/weapons/gun/energy/Laser1.ogg'
 	select_name = "tideshot"
 	e_cost = 250 //8%, 12 shots
 	harmful = FALSE

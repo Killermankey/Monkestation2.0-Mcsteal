@@ -45,7 +45,8 @@ SUBSYSTEM_DEF(research)
 	///Associated list of all point types that techwebs will have and their respective 'abbreviated' name.
 	var/list/point_types = list(
 		TECHWEB_POINT_TYPE_GENERIC = "Gen. Res.",
-		TECHWEB_POINT_TYPE_NANITES = "Nanite Res."
+		TECHWEB_POINT_TYPE_NANITES = "Nanite Res.",
+		TECHWEB_POINT_TYPE_AI = "AI Res.",
 	)
 	//----------------------------------------------
 	var/list/single_server_income = list(
@@ -114,6 +115,8 @@ SUBSYSTEM_DEF(research)
 
 		if (techweb_list.nanite_bonus)
 			bitcoins[TECHWEB_POINT_TYPE_GENERIC] += techweb_list.nanite_bonus
+		if(techweb_list.ai_boosted)
+			bitcoins[TECHWEB_POINT_TYPE_GENERIC] *= 1.2
 		if(!isnull(techweb_list.last_income))
 			var/income_time_difference = world.time - techweb_list.last_income
 			techweb_list.last_bitcoins = bitcoins  // Doesn't take tick drift into account

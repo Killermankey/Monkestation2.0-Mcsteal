@@ -12,6 +12,8 @@
 /// from /obj/obj_reskin: (mob/user, skin)
 #define COMSIG_OBJ_RESKIN "obj_reskin"
 
+#define COMSIG_LIONHUNTER_ON_HIT "lionhunter_on_hit"
+
 // /obj/machinery signals
 
 ///from /obj/machinery/atom_break(damage_flag): (damage_flag)
@@ -177,6 +179,9 @@
 #define COMSIG_PROJECTILE_PREHIT "com_proj_prehit"
 	#define PROJECTILE_INTERRUPT_HIT (1<<0)
 	#define PROJECTILE_INTERRUPT_HIT_PHASE (1<<1)
+	///flag to block the qdel that normally happens when a projectile is blocked
+	#define PROJECTILE_INTERRUPT_BLOCK_QDEL (1<<2)
+
 ///from /obj/projectile/process_movement(): ()
 #define COMSIG_PROJECTILE_MOVE_PROCESS_STEP "projectile_move_process_step"
 ///sent to self during the process_hit proc of projectiles
@@ -187,6 +192,10 @@
 #define COMSIG_PROJECTILE_RANGE_OUT "projectile_range_out"
 ///from the base of /obj/projectile/process(): ()
 #define COMSIG_PROJECTILE_BEFORE_MOVE "projectile_before_move"
+///sent to firer at the end of /mob/living/apply_projectile_effects(): (mob/living/target, hit_limb, blocked)
+#define COMSIG_PROJECTILE_POST_HIT_LIVING "projectile_post_hit_living"
+///sent to projectile at the end of /mob/living/apply_projectile_effects(): (mob/living/target, hit_limb, blocked)
+#define COMSIG_PROJECTILE_SELF_POST_HIT_LIVING "projectile_post_hit_living"
 
 ///sent to the projectile after an item is spawned by the projectile_drop element: (new_casing)
 #define COMSIG_PROJECTILE_ON_SPAWN_DROP "projectile_on_spawn_drop"
@@ -243,3 +252,13 @@
 
 /// from /obj/structure/cursed_slot_machine/determine_victor() when someone finally wins.
 #define COMSIG_GLOB_CURSED_SLOT_MACHINE_WON "cursed_slot_machine_won"
+
+/// Sent from /obj/effect/rune/convert/try_sacrifice_item(obj/effect/rune/convert/rune)
+#define COMSIG_ITEM_CULT_SACRIFICE "item_cult_sacrifice"
+	#define COMPONENT_SACRIFICE_SUCCESSFUL (1<<0)
+
+///sent by the ark SS whenever an anchoring crystal charges (/obj/structure/destructible/clockwork/anchoring_crystal/charged_crystal)
+#define COMSIG_ANCHORING_CRYSTAL_CHARGED "anchoring_crystal_charged"
+
+///sent by the ark SS whenever an anchoring crystal is created (/obj/structure/destructible/clockwork/anchoring_crystal/charged_crystal)
+#define COMSIG_ANCHORING_CRYSTAL_CREATED "anchoring_crystal_created"

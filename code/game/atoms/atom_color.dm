@@ -94,13 +94,14 @@
 ///Resets the atom's color to null, and then sets it to the highest priority colour available
 /atom/proc/update_atom_colour()
 	var/old_filter = cached_color_filter
+	var/old_color = color
 	color = null
 	cached_color_filter = null
 	remove_filter(ATOM_PRIORITY_COLOR_FILTER)
 	REMOVE_KEEP_TOGETHER(src, ATOM_COLOR_TRAIT)
 
 	if (!atom_colours)
-		if (old_filter)
+		if (!(SEND_SIGNAL(src, COMSIG_ATOM_COLOR_UPDATED, old_color || old_filter) & COMPONENT_CANCEL_COLOR_APPEARANCE_UPDATE) && old_filter)
 			update_appearance()
 		return
 
@@ -115,7 +116,7 @@
 			break
 
 	ADD_KEEP_TOGETHER(src, ATOM_COLOR_TRAIT)
-	if (cached_color_filter != old_filter)
+	if (!(SEND_SIGNAL(src, COMSIG_ATOM_COLOR_UPDATED, old_color != color || old_filter != cached_color_filter) & COMPONENT_CANCEL_COLOR_APPEARANCE_UPDATE) && cached_color_filter != old_filter)
 		update_appearance()
 
 /// Same as update_atom_color, but simplifies overlay coloring
@@ -123,4 +124,19 @@
 	overlay.color = color
 	if (!cached_color_filter)
 		return overlay
-	return filter_appearance_recursive(overlay, cached_color_filter)
+	// Apply the atom's color filter to the overlay using named filters so that
+	// later calls to add_filter/update_filters (e.g., height displacement filters)
+	// do not wipe out our coloration. Mirror prior behavior by propagating to
+	// child overlays unless KEEP_TOGETHER is present.
+	overlay.add_filter(ATOM_PRIORITY_COLOR_FILTER, ATOM_PRIORITY_COLOR_FILTER_PRIORITY, cached_color_filter)
+
+	if(!(overlay.appearance_flags & KEEP_TOGETHER))
+		// Recursively ensure any nested overlays/underlays also get the color filter
+		for(var/mutable_appearance/child_overlay as anything in overlay.overlays)
+			if(!isnull(child_overlay) && !(child_overlay.appearance_flags & KEEP_APART))
+				color_atom_overlay(child_overlay)
+		for(var/mutable_appearance/child_underlay as anything in overlay.underlays)
+			if(!isnull(child_underlay) && !(child_underlay.appearance_flags & KEEP_APART))
+				color_atom_overlay(child_underlay)
+
+	return overlay

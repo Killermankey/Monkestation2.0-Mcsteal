@@ -524,7 +524,7 @@
 /datum/action/changeling/suit/armor
 	name = "Chitinous Armor"
 	desc = "We turn our skin into tough chitin to protect us from damage, as well as pepperspray and flashbangs. Costs 20 chemicals."
-	helptext = "Upkeep of the armor requires a low expenditure of chemicals. The armor provides decent protection against brute force and energy weapons. Cannot be used in lesser form."
+	helptext = "Upkeep of the armor requires a low expenditure of chemicals. The armor provides decent protection against brute force and energy weapons. Cannot be used in lesser form. Slows chemical generation when active."
 	button_icon_state = "chitinous_armor"
 	chemical_cost = 20
 	dna_cost = 2
@@ -543,6 +543,7 @@
 	icon_state = "lingarmor"
 	inhand_icon_state = null
 	item_flags = DROPDEL
+	clothing_flags = PLASMAMAN_PREVENT_IGNITION
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	armor_type = /datum/armor/armor_changeling
 	flags_inv = HIDEJUMPSUIT
@@ -572,6 +573,7 @@
 	icon_state = "lingarmorhelmet"
 	inhand_icon_state = null
 	item_flags = DROPDEL
+	clothing_flags = PLASMAMAN_PREVENT_IGNITION
 	armor_type = /datum/armor/helmet_changeling
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEEYES|HIDEFACIALHAIR|HIDEFACE|HIDESNOUT
 	flags_cover = PEPPERPROOF

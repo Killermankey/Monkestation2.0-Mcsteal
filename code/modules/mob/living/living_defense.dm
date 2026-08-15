@@ -151,13 +151,17 @@
 	if (proj.damage && armor_check < 100)
 		create_projectile_hit_effects(proj, def_zone, armor_check)
 
+	if(proj.fired_from)
+		SEND_SIGNAL(proj.fired_from, COMSIG_PROJECTILE_POST_HIT_LIVING, src, def_zone, armor_check)
+	SEND_SIGNAL(proj, COMSIG_PROJECTILE_SELF_POST_HIT_LIVING, src, def_zone, armor_check)
+
 /mob/living/proc/create_projectile_hit_effects(obj/projectile/proj, def_zone, blocked)
 	if (proj.damage_type != BRUTE)
 		return
 
 	var/obj/item/bodypart/hit_bodypart = get_bodypart(check_hit_limb_zone_name(def_zone))
 	if (blood_volume && (isnull(hit_bodypart) || hit_bodypart.can_bleed()))
-		do_splatter_effect(angle2dir(proj.angle))
+		create_splatter(angle2dir(proj.angle))
 		if(prob(33))
 			add_splatter_floor(get_turf(src))
 		return
@@ -253,9 +257,6 @@
 		Knockdown(4 SECONDS)
 		emote("scream", intentional=FALSE)
 	return ..()
-
-/mob/living/proc/create_splatter(splatter_dir)
-	new /obj/effect/temp_visual/dir_setting/bloodsplatter(get_turf(src), splatter_dir)
 
 /mob/living/fire_act()
 	. = ..()
