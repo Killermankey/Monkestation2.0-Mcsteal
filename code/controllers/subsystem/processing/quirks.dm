@@ -36,14 +36,14 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 		list("Social Anxiety", "Mute"),
 		list("Mute", "Soft-Spoken"),
 		list("Stormtrooper Aim", "Big Hands"),
-		//list("Bilingual", "Foreigner"), //monkestation edit, commented out
-		//MONKESTATION ADDITION START
+		list("Common Second Language", "Foreigner"),
 		list("Listener", "Uncommon"),
 		list("Outsider", "Uncommon"),
 		list("Listener", "Mute"),
 		list("Listener", "Deaf"),
 		list("Polyglot", "Listener"),
 		list("Polyglot", "Bilingual"),
+		list("Polyglot", "Common Second Language"),
 		list("Lisp", "Mute"),
 		list("Polyglot", "Foreigner"),
 		//might be fun to change this in the future. you can be a body purist but be forced to use implants regardless for medical reasons
@@ -56,7 +56,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 		list("Prosthetic Limb", "Monoplegic"),
 		list("Cyborg Pre-screened dogtag", "Unborgable"),
 		list("Revival Blacklist", "Uncloneable Neurons"),
-		//MONKESTATION ADDITION END
+		list("Mute", "Fluffy Tongue")
 	)
 
 /datum/controller/subsystem/processing/quirks/Initialize()

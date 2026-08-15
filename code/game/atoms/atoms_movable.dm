@@ -439,6 +439,8 @@
 			if(z_move_flags & ZMOVE_FEEDBACK)
 				to_chat(rider || src, span_warning("There's nowhere to go in that direction!"))
 			return FALSE
+	if(SEND_SIGNAL(src, COMSIG_CAN_Z_MOVE, start, destination) & COMPONENT_CANT_Z_MOVE)
+		return FALSE
 	if(z_move_flags & ZMOVE_FALL_CHECKS && (throwing || (movement_type & (FLYING|FLOATING)) || !has_gravity(start)))
 		return FALSE
 	if(z_move_flags & ZMOVE_CAN_FLY_CHECKS && !(movement_type & (FLYING|FLOATING)) && has_gravity(start))
@@ -995,15 +997,6 @@
 					if(!length(recursive_contents[channel]))
 						SSspatial_grid.add_grid_awareness(location, channel)
 			recursive_contents[channel] |= arrived.important_recursive_contents[channel]
-
-/**
- * Returns a bitfield containing flags both present in `flags` arg and the `processing_move_loop_flags` move_packet variable.
- * Has no use outside of procs called within the movement proc chain.
- */
-/atom/movable/proc/check_move_loop_flags(flags)
-	if(!move_packet)
-		return NONE
-	return flags & move_packet.processing_move_loop_flags
 
 ///allows this movable to hear and adds itself to the important_recursive_contents list of itself and every movable loc its in
 /atom/movable/proc/become_hearing_sensitive(trait_source = TRAIT_GENERIC)

@@ -39,6 +39,7 @@
 	new /obj/item/clothing/shoes/laceup(src)
 	new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/clothing/head/caphat/beret(src)
+	new /obj/item/clothing/head/hats/caphat/armored(src)
 
 /obj/item/storage/bag/garment/hos
 	name = "head of security's garment bag"
@@ -180,3 +181,23 @@
 	new /obj/item/clothing/head/soft/sec/medical(src)
 	new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/clothing/shoes/sneakers/white(src)
+
+/obj/item/storage/bag/garment/blueshield
+	name = "blueshield's garment bag"
+	desc = "A bag for storing extra clothes and shoes. This one belongs to the blueshield."
+
+/obj/item/storage/bag/garment/blueshield/PopulateContents()
+	new /obj/item/clothing/under/rank/security/private/corporal(src)
+	new /obj/item/clothing/head/helmet/swat/nanotrasen(src)
+	new /obj/item/clothing/mask/gas/sechailer/swat(src)
+	new /obj/item/clothing/suit/hooded/wintercoat/nova/blueshield(src)
+	new /obj/item/clothing/head/beret/blueshield(src)
+	new /obj/item/clothing/head/beret/blueshield/navy(src)
+	new /obj/item/clothing/under/rank/blueshield(src)
+	new /obj/item/clothing/under/rank/blueshield/skirt(src)
+	new /obj/item/clothing/under/rank/blueshield/turtleneck(src)
+	new /obj/item/clothing/under/rank/blueshield/turtleneck/skirt(src)
+	new /obj/item/clothing/suit/armor/vest/blueshield(src)
+	new /obj/item/clothing/suit/armor/vest/blueshield/jacket(src)
+	new /obj/item/clothing/neck/mantle/bsmantle(src)
+

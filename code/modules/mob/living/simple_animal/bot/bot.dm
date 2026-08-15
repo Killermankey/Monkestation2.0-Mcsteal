@@ -154,7 +154,8 @@
 /mob/living/simple_animal/bot/Initialize(mapload)
 	. = ..()
 	GLOB.bots_list += src
-	add_traits(list(TRAIT_SILICON_ACCESS, TRAIT_UNOBSERVANT), INNATE_TRAIT)
+	add_traits(list(TRAIT_SILICON_ACCESS, TRAIT_REAGENT_SCANNER, TRAIT_UNOBSERVANT), INNATE_TRAIT)
+	LoadComponent(/datum/component/bloodysoles/bot)
 
 	path_hud = new /datum/atom_hud/data/bot_path()
 	for(var/hud in path_hud.hud_icons) // You get to see your own path
@@ -330,7 +331,7 @@
 
 /mob/living/simple_animal/bot/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	if(amount > 0 && prob(10))
-		new /obj/effect/decal/cleanable/oil(loc)
+		new /obj/effect/decal/cleanable/blood/oil(loc)
 	return ..()
 
 /mob/living/simple_animal/bot/updatehealth()
@@ -1093,7 +1094,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 	if(!length(path))
 		addtimer(CALLBACK(src, PROC_REF(set_path), null), 0.6 SECONDS) // Enough time for the animate to finish
 
-/mob/living/simple_animal/bot/rust_heretic_act()
+/mob/living/simple_animal/bot/rust_heretic_act(rust_strength)
 	adjustBruteLoss(400)
 
 //Will always check hands first, because access_card is internal to the mob and can't be removed or swapped.

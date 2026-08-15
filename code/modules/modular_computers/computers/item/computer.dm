@@ -106,9 +106,6 @@
 	/// Allow people with chunky fingers to use?
 	var/allow_chunky = FALSE
 
-	/// Monkestation Addition. Do we force ethernet connection.
-	var/ethernet_forced = FALSE
-
 	///The amount of paper currently stored in the PDA
 	var/stored_paper = 10
 	///The max amount of paper that can be held at once.
@@ -240,7 +237,7 @@
 /obj/item/modular_computer/get_id_examine_strings(mob/user)
 	. = ..()
 	if(computer_id_slot)
-		. += "\The [src] is displaying [computer_id_slot]."
+		. += "[src] is displaying [computer_id_slot]:"
 		. += computer_id_slot.get_id_examine_strings(user)
 
 /obj/item/modular_computer/proc/print_text(text_to_print, paper_title = "")
@@ -267,14 +264,20 @@
 	if(computer_id_slot)
 		return FALSE
 
-	computer_id_slot = inserting_id
-	if(user)
-		if(!user.transferItemToLoc(inserting_id, src))
-			return FALSE
-		to_chat(user, span_notice("You insert \the [inserting_id] into the card slot."))
-	else
-		inserting_id.forceMove(src)
+	var/obj/item/card/id/real_id = inserting_id
+	if(!istype(real_id))
+		if(user)
+			balloon_alert(user, "not an ID card")
+		return FALSE
 
+	if(user)
+		if(!user.transferItemToLoc(real_id, src))
+			return FALSE
+		balloon_alert(user, "inserted [real_id]")
+	else
+		real_id.forceMove(src)
+
+	computer_id_slot = real_id
 	playsound(src, 'sound/machines/terminal_insert_disc.ogg', 50, FALSE)
 	if(ishuman(loc))
 		var/mob/living/carbon/human/human_wearer = loc
@@ -315,6 +318,8 @@
 	return TRUE
 
 /obj/item/modular_computer/mouse_drop_dragged(atom/over_object, mob/user)
+	if(isobserver(user))
+		return
 	if(!istype(over_object, /atom/movable/screen))
 		return attack_self(user)
 
@@ -666,9 +671,6 @@
 	if(hardware_flag & PROGRAM_CONSOLE)
 		return NTNET_ETHERNET_SIGNAL
 
-	if(ethernet_forced) //Monkestation Addition - Add a check for forced ethernet
-		return NTNET_ETHERNET_SIGNAL
-
 	// NTNet is down and we are not connected via wired connection. No signal.
 	if(!find_functional_ntnet_relay())
 		return NTNET_NO_SIGNAL
@@ -852,13 +854,13 @@
 			return ITEM_INTERACT_SUCCESS
 
 	if(istype(tool, /obj/item/paper))
-		//MONKESTATION EDIT START
-		// Don't allow plastic cards (including the spare ID safe code biscuits!) to be inserted
+		var/obj/item/paper/attacking_paper = tool
 		if(istype(tool, /obj/item/paper/paperslip/corporate))
 			return ITEM_INTERACT_BLOCKING
-		//MONKESTATION EDIT END
 		if(stored_paper >= max_paper)
 			balloon_alert(user, "no more room!")
+			return ITEM_INTERACT_BLOCKING
+		if(!attacking_paper.is_empty() && tgui_alert(user, "\the [attacking_paper] has contents on it! Are you sure you want to recycle it?", "Recycling", list("Yes", "No")) != "Yes")
 			return ITEM_INTERACT_BLOCKING
 		if(!user.temporarilyRemoveItemFromInventory(tool))
 			return FALSE

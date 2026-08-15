@@ -109,6 +109,9 @@
 /obj/docking_port/stationary/random/icemoon
 	target_area = /area/icemoon/surface/outdoors/unexplored/rivers/no_monsters
 
+/obj/docking_port/stationary/random/oshan
+	target_area = /area/ocean/generated
+
 //Pod suits/pickaxes
 
 
@@ -200,8 +203,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/item/storage/pod, 32)
 	new /obj/item/clothing/suit/space/orange(src)
 	new /obj/item/clothing/mask/gas(src)
 	new /obj/item/clothing/mask/gas(src)
-	new /obj/item/tank/internals/oxygen/red(src)
-	new /obj/item/tank/internals/oxygen/red(src)
+	new /obj/item/tank/internals/oxygen/yellow(src)
+	new /obj/item/tank/internals/oxygen/yellow(src)
 	new /obj/item/pickaxe/emergency(src)
 	new /obj/item/pickaxe/emergency(src)
 	new /obj/item/survivalcapsule(src)
