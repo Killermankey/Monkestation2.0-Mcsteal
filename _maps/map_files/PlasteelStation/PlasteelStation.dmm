@@ -655,8 +655,6 @@
 /obj/item/stack/sheet/glass/fifty,
 /obj/item/stack/sheet/glass/fifty,
 /obj/item/crowbar,
-/obj/item/grenade/chem_grenade/smart_metal_foam,
-/obj/item/grenade/chem_grenade/smart_metal_foam,
 /turf/open/floor/iron,
 /area/station/engineering/storage)
 "cr" = (
@@ -2712,14 +2710,6 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/security/medical)
-"jS" = (
-/obj/machinery/plumbing/ooze_sucker{
-	mapping_id = "1";
-	dir = 1
-	},
-/obj/effect/turf_decal/sand/plating/volcanic,
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
 "jT" = (
 /obj/structure/window/reinforced/spawner/directional/west,
 /turf/open/space/basic,
@@ -4285,20 +4275,6 @@
 /area/station/security/bitden)
 "pw" = (
 /obj/structure/table,
-/obj/item/grenade/chem_grenade/smart_metal_foam{
-	pixel_x = -4;
-	pixel_y = 6
-	},
-/obj/item/grenade/chem_grenade/smart_metal_foam{
-	pixel_x = 4;
-	pixel_y = 2
-	},
-/obj/item/grenade/chem_grenade/smart_metal_foam{
-	pixel_x = 8
-	},
-/obj/item/grenade/chem_grenade/smart_metal_foam{
-	pixel_y = 4
-	},
 /turf/open/floor/iron,
 /area/station/ai_monitored/command/storage/eva)
 "px" = (
@@ -5337,9 +5313,16 @@
 /turf/open/floor/plating/airless,
 /area/station/asteroid)
 "sO" = (
-/obj/machinery/duct,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
+/obj/item/radio/intercom/directional/south{
+	freerange = 1;
+	frequency = 1447;
+	listening = 0;
+	name = "Private Channel";
+	pixel_y = -12;
+	pixel_x = -26
+	},
+/turf/open/floor/plating,
+/area/station/ai_monitored/turret_protected/ai)
 "sP" = (
 /obj/structure/table/wood,
 /turf/open/floor/wood,
@@ -6372,11 +6355,8 @@
 /turf/open/floor/carpet/grimey,
 /area/station/security/detectives_office)
 "wH" = (
-/obj/machinery/plumbing/ooze_sucker{
-	mapping_id = "3"
-	},
-/obj/effect/turf_decal/sand/plating/volcanic,
-/turf/open/floor/engine,
+/obj/machinery/slime_compressor,
+/turf/open/floor/iron/white,
 /area/station/science/xenobiology)
 "wI" = (
 /obj/machinery/computer/security/qm{
@@ -8852,14 +8832,6 @@
 /obj/machinery/light/no_nightlight/directional/east,
 /turf/open/floor/iron,
 /area/station/engineering/main)
-"FJ" = (
-/obj/machinery/plumbing/ooze_sucker{
-	mapping_id = "2";
-	dir = 1
-	},
-/obj/effect/turf_decal/sand/plating/volcanic,
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
 "FL" = (
 /obj/machinery/door/poddoor/incinerator_atmos_main,
 /turf/open/floor/engine,
@@ -9835,10 +9807,6 @@
 /turf/open/floor/iron,
 /area/station/engineering/main)
 "JC" = (
-/obj/machinery/door/airlock/corporate{
-	id_tag = "Repdoor";
-	name = "Representative's Office"
-	},
 /obj/effect/mapping_helpers/airlock/access/any/command/nt_rep,
 /obj/effect/landmark/navigate_destination,
 /obj/machinery/door/firedoor,
@@ -10401,10 +10369,6 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/airlock/corporate{
-	id_tag = "BSdoor";
-	name = "Blueshield's Office"
-	},
 /obj/effect/landmark/navigate_destination,
 /obj/machinery/door/firedoor,
 /obj/effect/mapping_helpers/airlock/access/any/command/blueshield,
@@ -12180,23 +12144,25 @@
 /turf/open/floor/plating,
 /area/station/engineering/supermatter/room)
 "Si" = (
-/obj/machinery/plumbing/ooze_sucker{
-	mapping_id = "4"
+/obj/item/radio/intercom/directional/east{
+	freerange = 1;
+	listening = 0;
+	name = "Custom Channel";
+	pixel_y = -8
 	},
-/mob/living/basic/slime,
-/obj/effect/turf_decal/sand/plating/volcanic,
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
+/obj/item/radio/intercom/directional/west{
+	freerange = 1;
+	listening = 0;
+	name = "Common Channel";
+	pixel_y = -8
+	},
+/turf/open/floor/plating,
+/area/station/ai_monitored/turret_protected/ai)
 "Sj" = (
 /obj/effect/spawner/structure/window/hollow/middle,
 /obj/machinery/atmospherics/pipe/smart/simple/orange/hidden,
 /turf/open/floor/plating,
 /area/station/engineering/break_room)
-"Sk" = (
-/obj/machinery/duct,
-/obj/effect/turf_decal/sand/plating/volcanic,
-/turf/open/floor/engine,
-/area/station/science/xenobiology)
 "Sl" = (
 /obj/structure/window/reinforced/spawner/directional/west,
 /obj/structure/window/reinforced/spawner/directional/north,
@@ -13239,7 +13205,30 @@
 /turf/closed/wall,
 /area/station/medical/storage)
 "VE" = (
-/obj/effect/landmark/start/ai,
+/obj/machinery/ai/data_core/primary,
+/obj/machinery/turretid{
+	icon_state = "control_stun";
+	name = "AI Chamber turret control";
+	pixel_x = 3;
+	pixel_y = -23
+	},
+/obj/machinery/button/door/directional/south{
+	id = "AI Chamber entrance shutters";
+	name = "AI Chamber Entrance Shutters Control";
+	pixel_x = -24;
+	req_access = list("ai_upload")
+	},
+/obj/machinery/button/door/directional/south{
+	id = "AI Core shutters";
+	name = "AI Core Shutters Control";
+	pixel_x = -24;
+	req_access = list("ai_upload");
+	pixel_y = 24
+	},
+/obj/machinery/camera/directional/north{
+	c_tag = "AI Chamber - Core";
+	network = list("aicore")
+	},
 /turf/open/floor/plating,
 /area/station/ai_monitored/turret_protected/ai)
 "VF" = (
@@ -13604,11 +13593,6 @@
 /obj/machinery/suit_storage_unit/blueshield,
 /turf/open/floor/wood,
 /area/station/command/heads_quarters/blueshield)
-"WW" = (
-/obj/effect/turf_decal/sand/plating,
-/obj/machinery/duct,
-/turf/open/floor/plating,
-/area/station/science/xenobiology)
 "WX" = (
 /obj/structure/window/reinforced/tinted/frosted/spawner/directional/north,
 /obj/structure/window/reinforced/tinted/frosted/spawner/directional/west,
@@ -13738,11 +13722,6 @@
 /obj/structure/bookcase/random/fiction,
 /turf/open/floor/wood,
 /area/station/service/library)
-"XD" = (
-/obj/effect/turf_decal/bot_white,
-/obj/machinery/plumbing/ooze_compressor,
-/turf/open/floor/iron/white,
-/area/station/science/xenobiology)
 "XE" = (
 /obj/effect/turf_decal/tile/red/anticorner/contrasted{
 	dir = 4
@@ -14225,6 +14204,9 @@
 	pixel_y = -1
 	},
 /obj/structure/table/reinforced,
+/obj/item/grenade/chem_grenade/smart_metalfoam,
+/obj/item/grenade/chem_grenade/smart_metalfoam,
+/obj/item/grenade/chem_grenade/smart_metalfoam,
 /turf/open/floor/iron,
 /area/station/engineering/storage)
 "Zf" = (
@@ -42945,14 +42927,14 @@ Vr
 NH
 Qp
 Qp
-jS
-Sk
+Qp
+Qp
 Qp
 NH
 Qp
 Qp
-wH
-Sk
+Qp
+Qp
 Qp
 NH
 Vr
@@ -43202,14 +43184,14 @@ Jm
 NH
 Qp
 Qp
-Sk
-Sk
+Qp
+Qp
 Qp
 NH
 Qp
 Qp
-Sk
-Sk
+Qp
+Qp
 Qp
 NH
 Vr
@@ -43451,7 +43433,7 @@ FN
 re
 cQ
 xo
-cm
+wH
 EW
 ol
 az
@@ -43459,13 +43441,13 @@ Jm
 NH
 RQ
 Qp
-Sk
+Qp
 Qp
 aj
 NH
 uL
 Qp
-Sk
+Qp
 Qp
 Vv
 NH
@@ -43708,21 +43690,21 @@ XX
 re
 cu
 cm
-sO
-sO
-sO
+cm
+cm
+cm
 cm
 Js
 Js
 Js
 Js
-WW
 Js
 Js
 Js
 Js
 Js
-WW
+Js
+Js
 Js
 Js
 NH
@@ -43965,21 +43947,21 @@ rD
 re
 re
 cm
-sO
-XD
-sO
-sO
-WW
-WW
-WW
-WW
-WW
-WW
-WW
-WW
-WW
-WW
-WW
+cm
+cm
+cm
+cm
+Js
+Js
+Js
+Js
+Js
+Js
+Js
+Js
+Js
+Js
+Js
 Js
 Js
 NH
@@ -44222,21 +44204,21 @@ TR
 TR
 Tw
 cm
-sO
-XD
-sO
+cm
+cm
+cm
 cm
 Js
 Js
 Js
 Js
-WW
 Js
 Js
 Js
 Js
 Js
-WW
+Js
+Js
 Js
 Js
 NH
@@ -44479,21 +44461,21 @@ cm
 dI
 cm
 cm
-sO
-XD
-sO
+cm
+cm
+cm
 Ky
 Jm
 NH
 kg
 Qp
-Sk
+Qp
 Qp
 ZC
 NH
 od
 Qp
-Sk
+Qp
 Qp
 Ku
 NH
@@ -44744,14 +44726,14 @@ Jm
 NH
 Qp
 Qp
-Sk
-Sk
+Qp
+Qp
 Qp
 NH
 Qp
 Qp
-Sk
-Sk
+Qp
+Qp
 Qp
 NH
 Vr
@@ -45001,14 +44983,14 @@ Jm
 NH
 Qp
 LO
-FJ
-Sk
+Qp
+Qp
 Qp
 NH
 Qp
 Qp
-Si
-Sk
+LO
+Qp
 Qp
 NH
 Vr
@@ -61850,11 +61832,11 @@ IM
 iv
 yI
 hE
-jw
-yI
-yI
-yI
-jw
+hE
+hE
+hE
+hE
+hE
 hE
 yI
 iv
@@ -62107,11 +62089,11 @@ IM
 iv
 yI
 hE
+jw
 yI
 yI
 yI
-yI
-yI
+jw
 hE
 yI
 iv
@@ -62622,9 +62604,9 @@ iv
 yI
 hE
 hE
+sO
 hE
-hE
-hE
+Si
 hE
 hE
 yI
